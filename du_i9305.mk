@@ -14,10 +14,10 @@
 # limitations under the License.
 
 # Inherit Omni GSM telephony parts
-$(call inherit-product, vendor/omni/config/gsm.mk)
+$(call inherit-product, vendor/du/config/gsm.mk)
 
 # Inherit from our omni product configuration
-$(call inherit-product, vendor/omni/config/common.mk)
+$(call inherit-product, vendor/du/config/common.mk)
 
 # Inherit device configuration
 $(call inherit-product, device/samsung/i9305/full_i9305.mk)
@@ -30,7 +30,7 @@ TARGET_SCREEN_HEIGHT := 1280
 TARGET_SCREEN_WIDTH := 720
 
 # Discard inherited values and use our own instead.
-PRODUCT_NAME := omni_i9305
+PRODUCT_NAME := du_i9305
 PRODUCT_DEVICE := i9305
 PRODUCT_BRAND := samsung
 PRODUCT_MANUFACTURER := Samsung

@@ -16,4 +16,4 @@
 
 PRODUCT_MAKEFILES := \
     $(LOCAL_DIR)/aosp_i9305.mk \
-    $(LOCAL_DIR)/omni_i9305.mk
+    $(LOCAL_DIR)/du_i9305.mk

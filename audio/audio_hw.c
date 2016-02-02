@@ -205,7 +205,6 @@ static int (*csd_stop_playback)();
 static int (*csd_disable_device)();
 static int (*csd_enable_device)(int, int, uint32_t);
 static int (*csd_switch_device)(int,int);
-static int (*csd_volume)(int);
 static int (*csd_mic_mute)(int);
 static int (*csd_wide_voice)(uint8_t);
 static int (*csd_slow_talk)(uint8_t);
@@ -377,10 +376,10 @@ void select_devices(struct m0_audio_device *adev)
     for (i = 0; i < adev->num_dev_cfgs; i++)
     if (((adev->out_device & adev->dev_cfgs[i].mask) &&
         !(adev->active_out_device & adev->dev_cfgs[i].mask)) &&
-        !(adev->dev_cfgs[i].mask & AUDIO_DEVICE_BIT_IN)) {
+        !(adev->dev_cfgs[i].mask & AUDIO_DEVICE_BIT_IN))
         set_route_by_array(adev->mixer, adev->dev_cfgs[i].on,
                    adev->dev_cfgs[i].on_len);
-}
+
     for (i = 0; i < adev->num_dev_cfgs; i++)
     if (((adev->in_device & adev->dev_cfgs[i].mask) &&
         !(adev->active_in_device & adev->dev_cfgs[i].mask)) &&
@@ -685,10 +684,20 @@ static void select_mode(struct m0_audio_device *adev)
                     ALOGE("%s: csd_stop_voice error %d\n", __func__, err);
                 }
             }
-            adev->in_device = AUDIO_DEVICE_NONE;
-            force_all_standby(adev);
-            select_output_device(adev);
-            select_input_device(adev);
+            //Force Input Standby
+             adev->in_device = AUDIO_DEVICE_NONE;
+ 
+             ALOGD("%s: set voicecall route: voicecall_default_disable", __func__);
+             set_bigroute_by_array(adev->mixer, voicecall_default_disable, 1);
+             ALOGD("%s: set voicecall route: default_input_disable", __func__);
+             set_bigroute_by_array(adev->mixer, default_input_disable, 1);
+             ALOGD("%s: set voicecall route: headset_input_disable", __func__);
+             set_bigroute_by_array(adev->mixer, headset_input_disable, 1);
+             ALOGD("%s: set voicecall route: bt_disable", __func__);
+             set_bigroute_by_array(adev->mixer, bt_disable, 1);
+  
+             force_all_standby(adev);
+             select_output_device(adev);
         }
     }
 }
@@ -1841,9 +1850,9 @@ static int set_preprocessor_echo_delay(effect_handle_t handle,
 
     param->psize = sizeof(uint32_t);
     param->vsize = sizeof(uint32_t);
-    *(uint32_t *)param->data = AEC_PARAM_ECHO_DELAY;
-    *((int32_t *)param->data + 1) = delay_us;
-
+    uint32_t ed = AEC_PARAM_ECHO_DELAY ; memcpy(&param->data, &ed, sizeof(uint32_t)); //*(uint32_t *)param->data = AEC_PARAM_ECHO_DELAY;
+    memcpy((void*)(&param->data) + sizeof(int32_t), &delay_us, sizeof(int32_t)); //*((int32_t *)param->data + 1) = delay_us;
+    
     return set_preprocessor_param(handle, param);
 }
 

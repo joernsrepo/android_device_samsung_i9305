@@ -205,6 +205,7 @@ static int (*csd_stop_playback)();
 static int (*csd_disable_device)();
 static int (*csd_enable_device)(int, int, uint32_t);
 static int (*csd_switch_device)(int,int);
+static int (*csd_volume)(int);
 static int (*csd_mic_mute)(int);
 static int (*csd_wide_voice)(uint8_t);
 static int (*csd_slow_talk)(uint8_t);

@@ -44,6 +44,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     camera.smdk4x12
 
+# Gello
+PRODUCT_PACKAGES += \
+Gello
+
 # GPS
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/gps.conf:system/etc/gps.conf

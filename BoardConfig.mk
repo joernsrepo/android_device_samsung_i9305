@@ -41,14 +41,6 @@ TARGET_KERNEL_CONFIG := custom_i9305_defconfig
 TARGET_RECOVERY_FSTAB := device/samsung/i9305/rootdir/fstab.smdk4x12
 RECOVERY_FSTAB_VERSION := 2
 
-# F2FS
-PRODUCT_PACKAGES += \
-    fibmap.f2fs \
-    fsck.f2fs \
-    mkfs.f2fs
-
-TARGET_USERIMAGES_USE_F2FS := true
-
 # assert
 TARGET_OTA_ASSERT_DEVICE := m3,m3xx,i9305,GT-I9305
 

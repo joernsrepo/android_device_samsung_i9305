@@ -42,7 +42,9 @@ PRODUCT_PACKAGES += \
 
 # Product specific Packages
 PRODUCT_PACKAGES += \
-    DeviceSettings
+    DeviceSettings \
+    LockClock \
+    messaging
 
 # NFC
 PRODUCT_PACKAGES += \

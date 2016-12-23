@@ -18,4 +18,8 @@
 <resources xmlns:xliff="urnasis:names:tc:xliff:document:1.2 ">
     <!-- Volume Rocker Wake -->
     <bool name="config_show_volumeRockerWake">true</bool>
+    <!-- Whether to show a preference item for mobile plan -->
+    <bool name="config_show_mobile_plan">false</bool>
+    <!-- Whether to show a preference item for regulatory information in About phone -->
+    <bool name="config_show_regulatory_info">false</bool>
 </resources>

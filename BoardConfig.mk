@@ -42,7 +42,7 @@ TARGET_RECOVERY_DENSITY := mdpi
 
 # keylayout
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/proprietary/system/usr/keylayout/sec_touchkey.kl:system/usr/keylayout/sec_touchkey.kl
+    $(LOCAL_PATH)/keylayout/sec_touchkey.kl:system/usr/keylayout/sec_touchkey.kl
 
 # RIL
 BOARD_PROVIDES_LIBRIL := true

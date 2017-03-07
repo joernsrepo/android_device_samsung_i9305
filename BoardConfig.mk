@@ -40,6 +40,10 @@ TARGET_RECOVERY_FSTAB := device/samsung/i9305/rootdir/fstab.smdk4x12
 RECOVERY_FSTAB_VERSION := 2
 TARGET_RECOVERY_DENSITY := mdpi
 
+# keylayout
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/proprietary/system/usr/keylayout/sec_touchkey.kl:system/usr/keylayout/sec_touchkey.kl
+
 # RIL
 BOARD_PROVIDES_LIBRIL := true
 BOARD_MODEM_TYPE := mdm9x35

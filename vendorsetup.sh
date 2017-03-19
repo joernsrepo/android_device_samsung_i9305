@@ -1,0 +1,1 @@
+add_lunch_combo bs_i9305-userdebug

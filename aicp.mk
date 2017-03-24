@@ -5,15 +5,15 @@ PRODUCT_RELEASE_NAME := i9305
 TARGET_SCREEN_HEIGHT := 1280
 TARGET_SCREEN_WIDTH := 720
 
-# Inherit some common CM stuff.
-$(call inherit-product, vendor/cm/config/common_full_phone.mk)
+# Inherit some common AICP stuff.
+$(call inherit-product, vendor/aicp/configs/common_full_phone.mk)
 
 # Inherit device configuration
 $(call inherit-product, device/samsung/i9305/full_i9305.mk)
 
 # Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := i9305
-PRODUCT_NAME := lineage_i9305
+PRODUCT_NAME := aicp_i9305
 PRODUCT_BRAND := samsung
 PRODUCT_MODEL := GT-I9305
 PRODUCT_MANUFACTURER := samsung

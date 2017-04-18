@@ -194,5 +194,8 @@
     
     <!-- Enable blur support -->
     <bool name="config_uiBlurEnabled">true</bool>
+    
+    <!-- Hardware keys on/off option -->
+	<bool name="config_hwKeysPref">true</bool>
 
 </resources>

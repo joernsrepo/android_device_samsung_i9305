@@ -6,7 +6,7 @@ TARGET_SCREEN_HEIGHT := 1280
 TARGET_SCREEN_WIDTH := 720
 
 # Inherit some common AICP stuff.
-$(call inherit-product, vendor/aicp/configs/common_full_phone.mk)
+$(call inherit-product, vendor/aicp/configs/common.mk)
 
 # Inherit device configuration
 $(call inherit-product, device/samsung/i9305/full_i9305.mk)

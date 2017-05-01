@@ -170,17 +170,15 @@ class EdifyGenerator(object):
     # Exit code 124 == abort. run_program returns raw, so left-shift 8bit
     self.script.append('run_program("/tmp/install/bin/otasigcheck.sh") != "31744" || abort("Can\'t install this package on top of incompatible data. Please try another package or run a factory reset");')
 
+  def RunPersist(self, command):
+    self.script.append(('run_program("/tmp/install/bin/persist.sh", "%s");' % command))
+
   def ShowProgress(self, frac, dur):
     """Update the progress bar, advancing it over 'frac' over the next
     'dur' seconds.  'dur' may be zero to advance it via SetProgress
     commands instead of by time."""
     self.script.append("show_progress(%f, %d);" % (frac, int(dur)))
 
-  def FlashBoeffla(self):
-    self.script.append('package_extract_dir("Boeffla", "/tmp/Boeffla");')
-    self.script.append('run_program("/sbin/busybox", "unzip", "/tmp/Boeffla/Boeffla.zip", "META-INF/com/google/android/*", "-d", "/tmp/Boeffla");')
-    self.script.append('run_program("/sbin/sh", "/tmp/Boeffla/META-INF/com/google/android/update-binary", "dummy", "1", "/tmp/Boeffla/Boeffla.zip");')
-  
   def SetProgress(self, frac):
     """Set the position of the progress bar within the chunk defined
     by the most recent ShowProgress call.  'frac' should be in
@@ -410,7 +408,7 @@ class EdifyGenerator(object):
     for d, l in symlink_list:
       by_dest.setdefault(d, []).append(l)
 
-    for dest, links in sorted(by_dest.iteritems()):
+    for dest, links in sorted(by_dest.items()):
       cmd = ('symlink("%s", ' % (dest,) +
              ",\0".join(['"' + i + '"' for i in sorted(links)]) + ");")
       self.script.append(self.WordWrap(cmd))

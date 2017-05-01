@@ -703,74 +703,11 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   if OPTIONS.backuptool:
     script.Mount("/system")
     script.RunBackup("backup")
+    script.RunPersist("save")
     script.Unmount("/system")
 
   system_progress = 0.75
 
-  script.Print(" ")
-  script.Print(" ")
-  script.Print(" ")
-  script.Print(" RRRRRRRRRRRRRRRRR     RRRRRRRRRRRRRRRRR   ")
-  script.Print(" R::::::::::::::::R    R::::::::::::::::R  ")
-  script.Print(" R::::::RRRRRR:::::R   R::::::RRRRRR:::::R ")
-  script.Print(" RR:::::R     R:::::R  RR:::::R     R:::::R")
-  script.Print("   R::::R     R:::::R    R::::R     R:::::R")
-  script.Print("   R::::R     R:::::R    R::::R     R:::::R")
-  script.Print("   R::::RRRRRR:::::R     R::::RRRRRR:::::R ")
-  script.Print("   R:::::::::::::RR      R:::::::::::::RR  ")
-  script.Print("   R::::RRRRRR:::::R     R::::RRRRRR:::::R ")
-  script.Print("   R::::R     R:::::R    R::::R     R:::::R")
-  script.Print("   R::::R     R:::::R    R::::R     R:::::R")
-  script.Print("   R::::R     R:::::R    R::::R     R:::::R")
-  script.Print(" RR:::::R     R:::::R  RR:::::R     R:::::R")
-  script.Print(" R::::::R     R:::::R  R::::::R     R:::::R")
-  script.Print(" R::::::R     R:::::R  R::::::R     R:::::R")
-  script.Print(" RRRRRRRR     RRRRRRR  RRRRRRRR     RRRRRRR")
-  script.Print(" ")
-  script.Print(" ")
-  
-  if GetBuildProp("ro.rr.version", OPTIONS.info_dict) is not None:
-    buildid = GetBuildProp("ro.rr.version", OPTIONS.info_dict)
-    buildtype = GetBuildProp("rr.build.type", OPTIONS.info_dict)
-    buildidn = GetBuildProp("ro.build.id", OPTIONS.info_dict)
-    buildday = GetBuildProp("ro.build.date", OPTIONS.info_dict)
-    securep = GetBuildProp("ro.build.version.security_patch", OPTIONS.info_dict)
-    buildhst = GetBuildProp("ro.build.host", OPTIONS.info_dict)
-    density = GetBuildProp("ro.sf.lcd_density", OPTIONS.info_dict)
-    device = GetBuildProp("ro.rr.device", OPTIONS.info_dict)
-    androidver = GetBuildProp("ro.build.version.release", OPTIONS.info_dict)
-    manufacturer = GetBuildProp("ro.product.manufacturer", OPTIONS.info_dict)
-    maintainer = GetBuildProp("ro.build.user", OPTIONS.info_dict)
-    sdkver = GetBuildProp("ro.build.version.sdk", OPTIONS.info_dict)
-    script.Print(" **************** Software *****************");
-    script.Print(" OS ver: %s"%(buildid));
-    script.Print("");
-    script.Print(" Android ver: %s"%(androidver));
-    script.Print("");
-    script.Print(" Security patch: %s"%(securep));
-    script.Print("");
-    script.Print(" SDK ver: %s"%(sdkver));
-    script.Print("");
-    script.Print(" Root status: Enabled");
-    script.Print("");
-    script.Print(" Build ID: %s"%(buildidn));
-    script.Print("");
-    script.Print(" Build date: %s"%(buildday));
-    script.Print("");
-    script.Print(" Build type: %s"%(buildtype));
-    script.Print("");
-    script.Print(" Build host: %s"%(buildhst));
-    script.Print("");
-    script.Print(" Maintainer: %s"%(maintainer));
-    script.Print(" **************** Hardware *****************");
-    script.Print(" Device codename: %s"%(device));
-    script.Print("");
-    script.Print(" Manufacturer: %s"%(manufacturer));
-    script.Print("");
-    script.Print(" LCD density: %s"%(density));
-    script.Print("");
-    script.Print(" *******************************************");
-  
   if OPTIONS.wipe_user_data:
     system_progress -= 0.1
   if HasVendorPartition(input_zip):
@@ -784,6 +721,30 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
     script.ValidateSignatures("data")
     script.Unmount("/data")
     script.AppendExtra("endif;")
+
+  script.Print("**********************************************");
+  script.Print("* ____                       _        _ _    *");
+  script.Print("*| __ )  ___  __ _ _ __  ___| |_ __ _| | | __*");
+  script.Print("*|  _ \ / _ \/ _` | '_ \/ __| __/ _` | | |/ /*");
+  script.Print("*| |_) |  __/ (_| | | | \__ \ || (_| | |   < *");
+  script.Print("*|____/ \___|\__,_|_| |_|___/\__\__,_|_|_|\_\*");
+  script.Print("*                                            *");
+  script.Print("**********************************************");
+
+  build = GetBuildProp("ro.build.date", OPTIONS.info_dict)
+  script.Print("******************************************");
+  script.Print("************  BEANSTALK ROM  *************");
+  script.Print("******************************************");
+  script.Print("*   Compiled: %s"%(build));
+
+  device = GetBuildProp("ro.product.device", OPTIONS.info_dict)
+  if GetBuildProp("ro.product.model", OPTIONS.info_dict) is not None:
+      model = GetBuildProp("ro.product.model", OPTIONS.info_dict)
+      script.Print("*   Device: %s (%s)"%(model, device));
+      script.Print("******************************************");
+  else:
+      script.Print("*   Device: %s "%(device));
+      script.Print("******************************************");
 
   if "selinux_fc" in OPTIONS.info_dict:
     WritePolicyConfig(OPTIONS.info_dict["selinux_fc"], output_zip)
@@ -861,17 +822,6 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
 
   script.ShowProgress(0.05, 5)
   script.WriteRawImage("/boot", "boot.img")
-  
-  if block_based:
-    script.Print(" ")
-    script.Print("Flashing Boeffla...")
-    script.Print(" ")
-    common.ZipWriteStr(output_zip, "Boeffla/Boeffla.zip",
-                   ""+input_zip.read("SYSTEM/addon.d/Boeffla.zip"))
-    script.FlashBoeffla()
-    script.Print(" ")
-  script.ShowProgress(0.2, 10)
-  device_specific.FullOTA_InstallEnd()
 
   script.ShowProgress(0.2, 10)
   device_specific.FullOTA_InstallEnd()
@@ -942,7 +892,8 @@ def GetBuildProp(prop, info_dict):
   try:
     return info_dict.get("build.prop", {})[prop]
   except KeyError:
-    raise common.ExternalError("couldn't find %s in build.prop" % (prop,))
+    print ("WARNING: could not find %s in build.prop" % (prop,))
+    return None
 
 
 def AddToKnownPaths(filename, known_paths):

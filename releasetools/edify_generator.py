@@ -172,6 +172,11 @@ class EdifyGenerator(object):
 
   def RunPersist(self, command):
     self.script.append(('run_program("/tmp/install/bin/persist.sh", "%s");' % command))
+  
+  def FlashBoeffla(self):
+    self.script.append('package_extract_dir("Boeffla", "/tmp/Boeffla");')
+    self.script.append('run_program("/sbin/busybox", "unzip", "/tmp/Boeffla/Boeffla.zip", "META-INF/com/google/android/*", "-d", "/tmp/Boeffla");')
+    self.script.append('run_program("/sbin/sh", "/tmp/Boeffla/META-INF/com/google/android/update-binary", "dummy", "1", "/tmp/Boeffla/Boeffla.zip");')
 
   def ShowProgress(self, frac, dur):
     """Update the progress bar, advancing it over 'frac' over the next

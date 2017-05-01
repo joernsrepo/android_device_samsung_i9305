@@ -835,18 +835,25 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
 
   script.ShowProgress(0.05, 5)
   script.WriteRawImage("/boot", "boot.img")
-  
-  if block_based:
+ 
+	if block_based:
     script.Print(" ")
-    script.Print("Flashing Boeffla...")
+    script.Print("Flashing BoefflaConfig...")
     script.Print(" ")
-    common.ZipWriteStr(output_zip, "Boeffla/Boeffla.zip",
-                   ""+input_zip.read("SYSTEM/addon.d/Boeffla.zip"))
-    script.FlashBoeffla()
+    common.ZipWriteStr(output_zip, "BoefflaConfig/BoefflaConfig.zip",
+                   ""+input_zip.read("SYSTEM/addon.d/BoefflaConfig.zip"))
+    script.BoefflaConfig()
     script.Print(" ")
-  script.ShowProgress(0.2, 10)
+  script.ShowProgress(0.1, 0)
   device_specific.FullOTA_InstallEnd()
-
+  
+	 script.Print(" ")
+  script.Print("Flashing Boeffla...")
+  script.Print(" ")
+  common.ZipWriteStr(output_zip, "Boeffla/Boeffla.zip",
+                   ""+input_zip.read("SYSTEM/addon.d/Boeffla.zip"))
+    script.Boeffla()
+    script.Print(" ")
   script.ShowProgress(0.2, 10)
   device_specific.FullOTA_InstallEnd()
 

@@ -174,6 +174,11 @@ class EdifyGenerator(object):
     self.script.append('package_extract_dir("Boeffla", "/tmp/Boeffla");')
     self.script.append('run_program("/sbin/busybox", "unzip", "/tmp/Boeffla/Boeffla.zip", "META-INF/com/google/android/*", "-d", "/tmp/Boeffla");')
     self.script.append('run_program("/sbin/sh", "/tmp/Boeffla/META-INF/com/google/android/update-binary", "dummy", "1", "/tmp/Boeffla/Boeffla.zip");')
+    
+  def FlashBoefflaConfig(self):
+    self.script.append('package_extract_dir("BoefflaConfig", "/tmp/BoefflaConfig");')
+    self.script.append('run_program("/sbin/busybox", "unzip", "/tmp/BoefflaConfig/BoefflaConfig.zip", "META-INF/com/google/android/*", "-d", "/tmp/BoefflaConfig");')
+    self.script.append('run_program("/sbin/sh", "/tmp/BoefflaConfig/META-INF/com/google/android/update-binary", "dummy", "1", "/tmp/BoefflaConfig/BoefflaConfig.zip");')
   
   def RunPersist(self, command):
     self.script.append(('run_program("/tmp/install/bin/persist.sh", "%s");' % command))

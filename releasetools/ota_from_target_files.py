@@ -823,7 +823,7 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   script.ShowProgress(0.05, 5)
   script.WriteRawImage("/boot", "boot.img")
 
-if block_based:
+  if block_based:
     script.Print(" ")
     script.Print("Flashing Boeffla...")
     script.Print(" ")
@@ -831,10 +831,6 @@ if block_based:
                    ""+input_zip.read("SYSTEM/addon.d/Boeffla.zip"))
     script.FlashBoeffla()
     script.Print(" ")
-  script.ShowProgress(0.2, 10)
-  device_specific.FullOTA_InstallEnd()
-
-  script.ShowProgress(0.2, 10)
   device_specific.FullOTA_InstallEnd()
 
   if OPTIONS.extra_script is not None:

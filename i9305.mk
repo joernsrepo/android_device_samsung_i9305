@@ -105,3 +105,7 @@ dalvik.vm.dex2oat-filter=speed \
 dalvik.vm.image-dex2oat-filter=speed \
 ro.sys.fw.dex2oat_thread_count=4 \
 ro.kernel.android.checkjni=0
+
+# World APN list
+PRODUCT_COPY_FILES += \
+    device/samsung/i9305/configs/apns-conf.xml:system/etc/apns-conf.xml

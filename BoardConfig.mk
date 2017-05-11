@@ -34,14 +34,8 @@ BOARD_GLOBAL_CFLAGS += -DCAMERA_WITH_CITYID_PARAM
 TARGET_REQUIRES_SYNCHRONOUS_SETSURFACE := true
 
 # Kernel
-#TARGET_KERNEL_SOURCE := kernel/samsung/smdk4412
-#TARGET_KERNEL_CONFIG := boeffled4_i9305_defconfig
-
-TARGET_PREBUILT_KERNEL := device/samsung/i9305/kernel
-
-# Copy BoefflaKernel zip
-PRODUCT_COPY_FILES += \
-    device/samsung/i9305/Boeffla/Boeffla.zip:system/addon.d/Boeffla.zip
+TARGET_KERNEL_SOURCE := kernel/samsung/smdk4412
+TARGET_KERNEL_CONFIG := boeffled4_i9305_defconfig
 
 # Recovery
 TARGET_RECOVERY_FSTAB := device/samsung/i9305/rootdir/fstab.smdk4x12

@@ -42,9 +42,6 @@ TARGET_PREBUILT_KERNEL := device/samsung/i9305/kernel
 # Copy BoefflaKernel zip
 PRODUCT_COPY_FILES += \
     device/samsung/i9305/Boeffla/Boeffla.zip:system/addon.d/Boeffla.zip
-    
-# release
-TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := device/samsung/i9305/releasetools/ota_from_target_files.py
 
 # Recovery
 TARGET_RECOVERY_FSTAB := device/samsung/i9305/rootdir/fstab.smdk4x12

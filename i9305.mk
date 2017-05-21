@@ -44,10 +44,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     DeviceSettings
 
-# SamsungDoze service
-PRODUCT_PACKAGES += \
-    SamsungDoze
-
 # NFC
 PRODUCT_PACKAGES += \
     nfc.exynos4 \

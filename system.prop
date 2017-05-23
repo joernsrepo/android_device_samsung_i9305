@@ -24,3 +24,4 @@ persist.radio.apm_sim_not_pwdn=0
 qcom.bluetooth.soc=rome
 
 ro.telephony.mms_data_profile=5
+persist.debug.wfd.enable=1

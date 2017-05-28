@@ -13,3 +13,5 @@ ro.lcd_min_brightness=20
 ro.egl.destroy_after_detach=true
 
 persist.debug.wfd.enable=1
+
+persist.sys.root_access=1

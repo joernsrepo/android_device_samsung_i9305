@@ -56,3 +56,6 @@ BOARD_SEPOLICY_DIRS += \
 
 # Device specific headers
 TARGET_SPECIFIC_HEADER_PATH += device/samsung/i9305/include
+
+# BLN
+BOARD_HAS_BLN := true

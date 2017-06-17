@@ -93,9 +93,9 @@ PRODUCT_COPY_FILES += \
 # Configure dalvik heap
 $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
 
-# Include device blobs first
-$(call inherit-product, vendor/samsung/i9305-propril/i9305-vendor.mk)
-
-# Include common makefile
+# Include common makefile first
 $(call inherit-product, device/samsung/smdk4412-common/common.mk)
 $(call inherit-product, device/samsung/smdk4412-qcom-common/common.mk)
+
+# Include device blobs
+$(call inherit-product, vendor/samsung/i9305-propril/i9305-vendor.mk)

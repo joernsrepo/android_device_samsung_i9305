@@ -93,9 +93,6 @@ PRODUCT_COPY_FILES += \
 # Configure dalvik heap
 $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
 
-# Include device blobs first
-$(call inherit-product, vendor/samsung/t0lte-propril/t0lte-vendor.mk)
-
 # Include common makefile
 $(call inherit-product, device/samsung/smdk4412-common/common.mk)
 $(call inherit-product, device/samsung/smdk4412-qcom-common/common.mk)
@@ -112,3 +109,9 @@ ro.kernel.android.checkjni=0
 # World APN list
 PRODUCT_COPY_FILES += \
     device/samsung/i9305/configs/apns-conf.xml:system/etc/apns-conf.xml
+# Include common makefile first
+$(call inherit-product, device/samsung/smdk4412-common/common.mk)
+$(call inherit-product, device/samsung/smdk4412-qcom-common/common.mk)
+
+# Include device blobs
+$(call inherit-product, vendor/samsung/i9305-propril/i9305-vendor.mk)

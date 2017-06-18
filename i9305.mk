@@ -63,6 +63,10 @@ PRODUCT_PACKAGES += \
 # Samsung symbols
 PRODUCT_PACKAGES += \
     libsamsung_symbols
+    
+# RIL
+PRODUCT_PROPERTY_OVERRIDES += \
+    mobiledata.interfaces=pdp0,gprs,ppp0,rmnet0,rmnet1
 
 # Sensors
 PRODUCT_PACKAGES += \

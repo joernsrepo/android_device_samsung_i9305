@@ -118,4 +118,4 @@ $(call inherit-product, device/samsung/smdk4412-common/common.mk)
 $(call inherit-product, device/samsung/smdk4412-qcom-common/common.mk)
 
 # Include device blobs
-$(call inherit-product, vendor/samsung/i9305-propril/i9305-vendor.mk)
+$(call inherit-product, vendor/samsung/i9305/i9305-vendor.mk)

@@ -1,0 +1,3 @@
+init_daemon_domain(SMD-daemon)
+init_daemon_domain(at_distributor)
+init_daemon_domain(qmiproxy)

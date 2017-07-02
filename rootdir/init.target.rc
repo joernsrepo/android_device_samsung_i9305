@@ -1,11 +1,11 @@
 #########################################################################################################################
 on init
-export LD_SHIM_LIBS /system/lib/libril.so|libsamsung_symbols.so
 #########################################################################################################################
 
 # Vibetonz
     export VIBE_PIPE_PATH /dev/pipes
     mkdir /dev/pipes 0771 shell shell
+    export LD_SHIM_LIBS /system/lib/libril.so|libsamsung_symbols.so
 
 # MDM requirement
     mkdir /data/cp_log
@@ -98,10 +98,6 @@ on post-fs-data
     restorecon /data/ISP_CV
     restorecon_recursive /efs/wifi
 
-# for AT distributor
-     chown system radio /sys/module/cpuidle_exynos4/parameters/enable_mask
-     chmod 0664 /sys/module/cpuidle_exynos4/parameters/enable_mask
-
 # Waketime fot fast dormancy
     chown system radio /sys/devices/platform/mdm_hsic_pm0/waketime
     chmod 0660 /sys/devices/platform/mdm_hsic_pm0/waketime
@@ -140,46 +136,45 @@ on property:init.svc.macloader=stopped
     chown system root /data/.rev
     chmod 0666 /data/.rev
 
+# AT Distributor for factory test
+service at_distributor /system/bin/at_distributor
+    seclabel u:r:at_distributor:s0
+    class late_start
+    user root
+    group radio log
+
+
 #########################################################################################################################
 on boot
 #########################################################################################################################
-
-on property:sys.boot_completed=1
-    write /sys/block/mmcblk0/queue/scheduler cfq
-    write /sys/power/cpufreq_min_limit -1
-
-# AT Distributor for factory test
-service at_distributor /system/bin/at_distributor
-    class late_start
-    user root
-    seclabel u:r:at_distributor:s0
-    group radio log
 
 # diag app for cp uart
 service diag_uart_log /system/bin/diag_uart_log
     class main
     user root
-    seclabel u:r:diag_uart_log:s0
     group radio
 
 service SMD-daemon /system/bin/smdexe
+    seclabel u:r:SMD-daemon:s0
     class main
     user root
-    seclabel u:r:SMD-daemon:s0
     group system radio inet net_raw
 
 service qc_kickstart /system/bin/qcks s
     class core
     user root
     group radio cache inet misc audio sdcard_rw log
+    seclabel u:r:qcks:s0
 
 #For EncryptionMode - remove disabled, Modify class main
 service qmiproxy /system/bin/qmiproxy
+    seclabel u:r:qmiproxy:s0
     class main
     user radio
     group radio gps
 
 service qmuxd /system/bin/qmuxd
+    seclabel u:r:qmuxd:s0
     class main
-    user system
+    user root
     group radio log audio bluetooth gps log

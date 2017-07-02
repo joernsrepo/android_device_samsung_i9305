@@ -1,3 +1,1 @@
-allow nfc firmware_camera:dir { search };
 allow nfc firmware_exynos:dir search;
-allow nfc log_device:chr_file { write };

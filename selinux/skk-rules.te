@@ -1,0 +1,44 @@
+allow SMD-daemon SMD-daemon:capability { setuid };
+allow SMD-daemon kernel:system { module_request };
+
+allow at_distributor at_distributor:capability { chown dac_override fowner fsetid setuid };
+allow at_distributor efs_file:dir { search };
+allow at_distributor efs_file:file { getattr open read setattr };
+allow at_distributor init:unix_stream_socket { connectto };
+allow at_distributor kernel:system { module_request };
+allow at_distributor proc:file { getattr open read };
+allow at_distributor property_socket:sock_file { write };
+allow at_distributor radio_data_file:dir { search };
+allow at_distributor radio_data_file:file { getattr open read };
+allow at_distributor radio_device:chr_file { ioctl open read write };
+allow at_distributor radio_prop:property_service { set };
+allow at_distributor rild:unix_stream_socket { connectto };
+allow at_distributor sysfs_wake_lock:file { open read write };
+
+allow qcks block_device:dir { write };
+allow qcks init:unix_stream_socket { connectto };
+allow qcks property_socket:sock_file { write };
+allow qcks radio_prop:property_service { set };
+
+allow qmiproxy init:unix_stream_socket { connectto };
+allow qmiproxy kernel:system { module_request };
+allow qmiproxy property_socket:sock_file { write };
+allow qmiproxy qmuxd_socket:dir { add_name search write };
+allow qmiproxy qmuxd_socket:sock_file { create };
+allow qmiproxy radio_prop:property_service { set };
+
+allow qmuxd qmuxd_socket:dir { add_name remove_name search write };
+allow qmuxd qmuxd_socket:sock_file { create getattr setattr unlink };
+
+allow rild at_distributor:dir { search };
+allow rild at_distributor:file { getattr open read };
+allow rild qmuxd_socket:dir { add_name remove_name search write };
+allow rild qmuxd_socket:sock_file { create setattr write };
+allow rild rild:capability { dac_override };
+
+allow system_server qmuxd_socket:dir { add_name search write };
+allow system_server qmuxd_socket:sock_file { create setattr write };
+allow audioserver qmuxd:unix_stream_socket connectto;
+allow audioserver qmuxd_socket:sock_file { write create setattr };
+allow audioserver qmuxd:unix_stream_socket { connectto };
+allow audioserver qmuxd_socket:dir { write search add_name };

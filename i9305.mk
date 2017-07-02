@@ -76,7 +76,8 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_COPY_FILES += \
     frameworks/base/nfc-extras/com.android.nfc_extras.xml:system/etc/permissions/com.android.nfc_extras.xml \
-    frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml
+    frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml \
+    frameworks/native/data/etc/android.hardware.sensor.barometer.xml:system/etc/permissions/android.hardware.sensor.barometer.xml
 
 # NFCEE access control
 ifeq ($(TARGET_BUILD_VARIANT),user)
@@ -99,10 +100,6 @@ PRODUCT_COPY_FILES += \
 # Configure dalvik heap
 $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
 
-# Include common makefile
-$(call inherit-product, device/samsung/smdk4412-common/common.mk)
-$(call inherit-product, device/samsung/smdk4412-qcom-common/common.mk)
-
 # VM Config
 PRODUCT_PROPERTY_OVERRIDES += \
 dalvik.vm.checkjni=false \
@@ -112,9 +109,9 @@ dalvik.vm.image-dex2oat-filter=speed \
 ro.sys.fw.dex2oat_thread_count=4 \
 ro.kernel.android.checkjni=0
 
-# Include common makefile first
+# Include device blobs first
+$(call inherit-product, vendor/samsung/i9305/i9305-vendor.mk)
+
+# Include common makefile
 $(call inherit-product, device/samsung/smdk4412-common/common.mk)
 $(call inherit-product, device/samsung/smdk4412-qcom-common/common.mk)
-
-# Include device blobs
-$(call inherit-product, vendor/samsung/i9305/i9305-vendor.mk)

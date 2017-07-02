@@ -1,0 +1,2 @@
+allow init rild:process noatsecure;
+allow init SMD-daemon:process noatsecure;

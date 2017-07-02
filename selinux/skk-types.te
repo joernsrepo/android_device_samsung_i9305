@@ -1,0 +1,9 @@
+type at_distributor, domain;
+type SMD-daemon, domain;
+type qmiproxy, domain;
+
+type qmuxd_socket, file_type;
+
+type qmiproxy_exec, exec_type, file_type;
+type at_distributor_exec, exec_type, file_type;
+type SMD-daemon_exec, exec_type, file_type;

@@ -107,6 +107,10 @@ $(call inherit-product, vendor/samsung/i9305/i9305-vendor.mk)
 $(call inherit-product, device/samsung/smdk4412-common/common.mk)
 $(call inherit-product, device/samsung/smdk4412-qcom-common/common.mk)
 
+# HIDL
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/manifest.xml:system/vendor/manifest.xml
+
 # HAL
 PRODUCT_PACKAGES += \
 android.hardware.power@1.0-impl \
@@ -146,3 +150,5 @@ android.hardware.memtrack@1.0-impl
 # Configstore
 PRODUCT_PACKAGES += \
 android.hardware.configstore@1.0-impl
+
+BOARD_SECCOMP_POLICY += device/samsung/i9305/configs/seccomp

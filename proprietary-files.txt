@@ -27,3 +27,6 @@ lib/libril-qcril-hook-oem.so
 lib/libsec-ril.so
 lib/libxml.so
 usr/keylayout/sec_touchkey.kl
+
+# STL
+lib/libstlport.so

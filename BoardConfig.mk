@@ -56,3 +56,8 @@ TARGET_OTA_ASSERT_DEVICE := m3,m3xx,i9305,GT-I9305
 # Selinux
 BOARD_SEPOLICY_DIRS += \
     $(DEVICE_PATH)/selinux
+
+# Charger
+RED_LED_PATH := "/sys/class/leds/led_r/brightness"
+GREEN_LED_PATH := "/sys/class/leds/led_g/brightness"
+BLUE_LED_PATH := "/sys/class/leds/led_b/brightness"

@@ -34,7 +34,8 @@ PRODUCT_COPY_FILES += \
 
 # Audio
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/tiny_hw.xml:system/etc/sound/m3
+    $(LOCAL_PATH)/configs/tiny_hw.xml:system/etc/sound/m3 \
+    $(LOCAL_PATH)/audio/audio_policy.conf:system/etc/audio_policy.conf
 
 # Camera
 PRODUCT_PACKAGES += \
@@ -42,7 +43,9 @@ PRODUCT_PACKAGES += \
 
 # Product specific Packages
 PRODUCT_PACKAGES += \
-    DeviceSettings
+    DeviceSettings\
+    AriesParts \
+    DockAudio
 
 # RIL
 PRODUCT_PACKAGES += \

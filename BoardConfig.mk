@@ -20,10 +20,10 @@
 -include device/samsung/smdk4412-common/BoardCommonConfig.mk
 -include device/samsung/smdk4412-qcom-common/BoardCommonConfig.mk
 
-LOCAL_PATH := device/samsung/i9305
+DEVICE_PATH := device/samsung/i9305
 
 # Bluetooth
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(LOCAL_PATH)/bluetooth
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(DEVICE_PATH)/bluetooth
 
 # Camera
 BOARD_GLOBAL_CFLAGS += -DCAMERA_WITH_CITYID_PARAM
@@ -31,12 +31,15 @@ BOARD_GLOBAL_CFLAGS += -DCAMERA_WITH_CITYID_PARAM
 # Graphics
 TARGET_REQUIRES_SYNCHRONOUS_SETSURFACE := true
 
+# Include path
+TARGET_SPECIFIC_HEADER_PATH += $(DEVICE_PATH)/include
+
 # Kernel
 TARGET_KERNEL_SOURCE := kernel/samsung/smdk4412
 TARGET_KERNEL_CONFIG := lineageos_i9305_defconfig
 
 # Recovery
-TARGET_RECOVERY_FSTAB := device/samsung/i9305/rootdir/fstab.smdk4x12
+TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/fstab.smdk4x12
 RECOVERY_FSTAB_VERSION := 2
 TARGET_RECOVERY_DENSITY := mdpi
 
@@ -52,4 +55,4 @@ TARGET_OTA_ASSERT_DEVICE := m3,m3xx,i9305,GT-I9305
 
 # Selinux
 BOARD_SEPOLICY_DIRS += \
-    device/samsung/i9305/selinux
+    $(DEVICE_PATH)/selinux

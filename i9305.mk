@@ -59,7 +59,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGES += \
     sensors.smdk4x12
 
- NFC
+# NFC
 PRODUCT_PACKAGES += \
     com.android.nfc_extras \
     NfcNci \
@@ -123,8 +123,8 @@ android.hardware.keymaster@3.0-impl \
 android.hardware.keymaster@3.0-service \
 android.hardware.bluetooth@1.0-impl \
 android.hardware.bluetooth@1.0-service \
-android.hardware.camera.provider@2.4-impl \
-android.hardware.camera.provider@2.4-service \
+camera.device@1.0-impl.legacy \
+android.hardware.camera.provider@2.4-impl.legacy \
 camera.device@3.2-impl \
 android.hardware.light@2.0-impl \
 android.hardware.usb@1.0-service \
